@@ -1,0 +1,27 @@
+{
+  "name": "api-rest",
+  "version": "1.0.0",
+  "description": "Api rest creada con node.js",
+  "main": "api-route.js",
+  "scripts": {
+    "start": "node api-route.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lautaroscu/Api-rest-node.js.git"
+  },
+  "keywords": [
+    "apirest",
+    "api"
+  ],
+  "author": "Lautaro Scuffi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lautaroscu/Api-rest-node.js/issues"
+  },
+  "homepage": "https://github.com/Lautaroscu/Api-rest-node.js#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
