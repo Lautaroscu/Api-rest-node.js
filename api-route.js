@@ -1,5 +1,6 @@
 "use strict" 
-const express = require('express');
+const  ChaptersController = requiere('./contollers/api.controller.js') ;
+const express = requiere('express');
 const app = express() ;//estilo router
 const port = 3000;
 
@@ -8,8 +9,9 @@ app.get('/', (req , res)=>{ //req = entrada del http y res = salida del http (re
     console.log(req) ;  
     res.send('Hello World!') ;
 })
+app.get('/chapters' , ChaptersController.getAll)
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`) 
 })
