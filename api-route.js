@@ -15,7 +15,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
-    } else {
+    } else { 
       callback(new Error())
     }
   }
@@ -29,7 +29,7 @@ const corsOptions = {
   
 
 
-const port = 3000;
+const port = 4000;
 
 
 //endpoints o tablas de ruteo

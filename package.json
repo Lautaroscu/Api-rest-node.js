@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon api-route.js",
-    "start": "node api-route.js",
+    "start": "node test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
