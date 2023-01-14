@@ -12,31 +12,37 @@ const getConecction = async () => {
 };
 
 export async function getAllQuerys(filter = null, sort = null, order = null, offset = null, limit = null) {
-    let sql = '';
+   
+    let sql = `SELECT * FROM tasks `;
     const FILTER = `WHERE tarea LIKE '%${filter}%' OR descripcion LIKE '%${filter}%' OR prioridad LIKE '%${filter}%' OR finalizada LIKE '%${filter}%' OR id LIKE '%${filter}%'`;
     const ORDER = `ORDER BY ${sort} ${order}`;
     const PAGINATION = `LIMIT ${offset} , ${limit}`;     
-    sql = `SELECT * FROM tasks `;
-    if ((filter && sort && order && offset && limit) != null) {
-        
+   
+    if ((filter && sort && order && (offset || limit)) != null && offset != NaN) {
+        console.log('filter and page and order') 
+
         sql += `${FILTER} ${ORDER} ${PAGINATION}`
     }
     else if ((filter && order && sort) != null) {
+        console.log('filter and order') 
+
         sql += `${FILTER} ${ORDER}`
         
     }
-    else if (((filter) && (offset && limit) )!= null  ) {
+    else if (((filter) && (offset || limit) )!= null && offset != NaN ) { 
+       console.log('filter and page')  
         sql += `${FILTER} ${PAGINATION}`
     }
-    else if (((sort && order) && (offset && limit)) != null) {
-        console.log(filter )
+    else if (((sort && order &&  (offset || limit))) != null && offset != NaN) {
+        console.log('order and page' )
         sql += `${ORDER} ${PAGINATION}` 
-    }
+    } 
     else if ((sort && order) != null) {
-       
         sql += `${ORDER}` ;
+        console.log('order')
     }
     else if (filter != null) {
+        console.log('filter')
         sql += `${FILTER}`
 
     }
@@ -49,7 +55,7 @@ export async function getAllQuerys(filter = null, sort = null, order = null, off
 
     }
     const connection = await getConecction();
-
+ 
     // let values = [ query.sort , query.order ]
     console.log(sql)
 
@@ -75,7 +81,7 @@ export const get = async (id) => {
     return rows;
 
 }
-export const deleteTask = async (id) => {
+export const deleteTask = async (id) => {  
     const connection = await getConecction();
     let sql = "DELETE FROM tasks WHERE id = ?";
     let values = [id];
@@ -85,6 +91,7 @@ export const deleteTask = async (id) => {
 export const insert = async (tarea, descipcion, prioridad) => {
     const connection = await getConecction();
     let sql = "INSERT INTO tasks (tarea , descripcion , prioridad , finalizada) VALUES (? , ? , ? , ?)";
+
     let values = Array(tarea, descipcion, prioridad, 0);
     const [rows] = await connection.execute(sql, values);
     return rows;

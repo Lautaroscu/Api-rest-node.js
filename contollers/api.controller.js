@@ -30,6 +30,7 @@ export async function getAllTasks(req = null, res) {
 const { filter, sort, order, page, limit } = req.query;
 console.log(filter)
     if (((page && limit) != null) || (filter != null) || ((order && sort) != null) ) {
+      console.log({order , sort})
        let offset = ((page-1) * limit )
        console.log(offset)
          console.log('primer')
@@ -58,24 +59,24 @@ export async function getTask(req, res) {
 }
 export async function deletee(req, res) {
    let id = req.params.id;
-   res.send(await get(id));
+   res.send(await get(id)); 
    await deleteTask(id)
 }
 export async function insertTask(req, res) {
-   const { tarea, descripcion, prioridad } = req.body;
-   console.log(req.body)
-   await insert(tarea, descripcion, prioridad);
-   res.send(req.body);
-
-}
+   const body = req.body;
+  const {tarea , descripcion , prioridad} = body ;
+    await insert(tarea, descripcion, prioridad); 
+   res.send(req.body);  
+ 
+}  
 export async function updateTask(req, res) {
    const { tarea, descripcion, prioridad } = req.body;
-   const id = req.params.id; 
-   await update(tarea, descripcion, prioridad, id); 
-   res.send(req.body);
-}
-export async function deleteAll(req, res) {
-   await deleteAllTasks();
+   const id = req.params.id;   
+   await update(tarea, descripcion, prioridad, id);  
+   res.send(req.body); 
+}  
+export async function deleteAll(req, res) { 
+   await deleteAllTasks();  
    res.send([]);
 }
 export async function finalizeTask(req, res) {
